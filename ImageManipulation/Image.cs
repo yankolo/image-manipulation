@@ -42,5 +42,37 @@ namespace ImageManipulation
                 for (int y = 0; y < _data.GetLength(1); y++)
                     _data[x, y] = new Pixel(_data[x, y].Grey());
         }
+
+        public void Flip(bool horizontal)
+        {
+            if (horizontal)
+            {
+                for (int y = 0; y < _data.GetLength(1); y++)
+                {
+                    Pixel[] temp = new Pixel[_data.GetLength(2)];
+
+                    for (int x = 0; x < _data.GetLength(2); x++)
+                    {
+                        temp[x] = _data[y, x];
+                        _data[y, x] = _data[_data.GetLength(1) - (1 + y), x];
+                        _data[_data.GetLength(1) - (1 + y), x] = temp[x];
+                    }
+                }
+            }
+            else
+            {
+                for (int x = 0; x < _data.GetLength(2); x++)
+                {
+                    Pixel[] temp = new Pixel[_data.GetLength(1)];
+
+                    for (int y = 0; y < _data.GetLength(1); y++)
+                    {
+                        temp[y] = _data[y, x];
+                        _data[y, x] = _data[y, _data.GetLength(2) - (1 + x)];
+                        _data[y, _data.GetLength(2) - (1 + x)] = temp[y];
+                    }
+                }
+            }
+        }
     }
 }
