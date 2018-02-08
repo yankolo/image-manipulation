@@ -47,32 +47,47 @@ namespace ImageManipulation
         {
             if (horizontal)
             {
-                for (int y = 0; y < _data.GetLength(1); y++)
+                for (int y = 0; y < _data.GetLength(0); y++)
                 {
-                    Pixel[] temp = new Pixel[_data.GetLength(2)];
+                    Pixel[] temp = new Pixel[_data.GetLength(1)];
 
-                    for (int x = 0; x < _data.GetLength(2); x++)
+                    for (int x = 0; x < _data.GetLength(1); x++)
                     {
                         temp[x] = _data[y, x];
-                        _data[y, x] = _data[_data.GetLength(1) - (1 + y), x];
-                        _data[_data.GetLength(1) - (1 + y), x] = temp[x];
+                        _data[y, x] = _data[_data.GetLength(0) - (1 + y), x];
+                        _data[_data.GetLength(0) - (1 + y), x] = temp[x];
                     }
                 }
             }
             else
             {
-                for (int x = 0; x < _data.GetLength(2); x++)
+                for (int x = 0; x < _data.GetLength(1); x++)
                 {
-                    Pixel[] temp = new Pixel[_data.GetLength(1)];
+                    Pixel[] temp = new Pixel[_data.GetLength(0)];
 
-                    for (int y = 0; y < _data.GetLength(1); y++)
+                    for (int y = 0; y < _data.GetLength(0); y++)
                     {
                         temp[y] = _data[y, x];
-                        _data[y, x] = _data[y, _data.GetLength(2) - (1 + x)];
-                        _data[y, _data.GetLength(2) - (1 + x)] = temp[y];
+                        _data[y, x] = _data[y, _data.GetLength(1) - (1 + x)];
+                        _data[y, _data.GetLength(1) - (1 + x)] = temp[y];
                     }
                 }
             }
+        }
+
+        public void Crop(int startX, int startY , int endX, int endY)
+        {
+            if (startX > endX || startY > endY || startX < 0 || startY < 0 || endX > _data.GetLength(2) || endY > _data.GetLength(1))
+                throw new ArgumentException("Invalid crop coordinates");
+
+            Pixel[,] croppedImage = new Pixel[(endY - startY), (endX - startX)];
+
+            for (int y = startY; y < endY; y++)
+                for (int x = startX; x < endX; x++)
+                {
+                    croppedImage[y, x] = _data[y,x];
+                }
+            _data = croppedImage;
         }
     }
 }
