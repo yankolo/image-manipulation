@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    class Pixel
+    public class Pixel
     {
         public int Red { get; private set; }
         public int Green { get; private set; }
