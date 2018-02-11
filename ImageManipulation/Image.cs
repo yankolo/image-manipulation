@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    class Image
+    public class Image
     {
         private Pixel[,] _data;
 
