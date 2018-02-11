@@ -22,6 +22,17 @@ namespace ImageManipulation
             }
         }
 
+        public int GetLength(int rank)
+        {
+            if (rank != 0 || rank != 1)
+                throw new IndexOutOfRangeException("You can only use ranks of either 0 or 1");
+
+            if (rank == 0)
+                return _data.GetLength(0);
+            else
+                return _data.GetLength(1);
+        }
+
         public Image(string metadata, int maxRange, Pixel[,] data)
         {
             if (maxRange < 0)
