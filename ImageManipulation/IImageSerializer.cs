@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    interface IImageSerializer
+    public interface IImageSerializer
     {
         String Serialize(Image i);
         Image Parse(String imageData);
