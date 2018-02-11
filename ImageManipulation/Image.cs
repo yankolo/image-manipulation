@@ -88,7 +88,7 @@ namespace ImageManipulation
 
         public void Crop(int startX, int startY , int endX, int endY)
         {
-            if (startX > endX || startY > endY || startX < 0 || startY < 0 || endX > _data.GetLength(2) || endY > _data.GetLength(1))
+            if (startX > endX || startY > endY || startX < 0 || startY < 0 || endX > _data.GetLength(1) || endY > _data.GetLength(0))
                 throw new ArgumentException("Invalid crop coordinates");
 
             Pixel[,] croppedImage = new Pixel[(endY - startY), (endX - startX)];
