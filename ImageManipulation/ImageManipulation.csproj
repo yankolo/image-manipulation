@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IImageSerializer.cs" />
     <Compile Include="Image.cs" />
+    <Compile Include="ImageUtilities.cs" />
     <Compile Include="PgmSerializer.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="PnmSerializer.cs" />
