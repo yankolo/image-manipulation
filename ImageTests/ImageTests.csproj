@@ -48,7 +48,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectoryFileLoaderTest.cs" />
+    <Compile Include="ImageTest.cs" />
+    <Compile Include="ImageUtilitiesTest.cs" />
     <Compile Include="PixelTest.cs" />
+    <Compile Include="Serialization.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
