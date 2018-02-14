@@ -38,90 +38,100 @@ namespace ImageManipulation
 
         public Image Parse(string imageData)
         {
+            // Getting information from string
+
             string[] lines = imageData.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+
             int currentLine = 1;
 
             string metadata = "";
-            for (; currentLine < lines.Length; currentLine++)
+            while (currentLine < lines.Length)
             {
                 if (lines[currentLine].StartsWith("#"))
-                    metadata += lines[currentLine].Substring(2);
+                    metadata += lines[currentLine].Substring(2) + " ";
                 else
                     break;
+
+                currentLine++;
             }
 
-            string[] widthHeight = lines[currentLine].Split(new string[] { System.Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-
-            int width;
-            int height;
-            if (int.TryParse(widthHeight[0].Trim(), out width) == false)
-                throw new InvalidDataException();
-            if (int.TryParse(widthHeight[1].Trim(), out height) == false)
-                throw new InvalidDataException();
-            if (width <= 0 || height <= 0)
-                throw new InvalidDataException();
+            string[] widthHeight = lines[currentLine].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string widthInString = widthHeight[0].Trim();
+            string heightInString = widthHeight[1].Trim();
 
             currentLine++;
 
+            string maxRangeInString = lines[currentLine].Trim();
+
+            currentLine++;
+
+            List<string> numbersInStrings = new List<string>();
+            while(currentLine < lines.Length)
+            {
+                string[] numbersOnLine = lines[currentLine].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string number in numbersOnLine)
+                    numbersInStrings.Add(number);
+
+                currentLine++;
+            }
+
+            // Validating the information and parsing it into the right type
+
+            int width;
+            int height;
+            if (int.TryParse(widthInString, out width) == false)
+                 throw new InvalidDataException();
+            if (int.TryParse(heightInString, out height) == false)
+                 throw new InvalidDataException();
+            if (width <= 0 || height <= 0)
+                 throw new InvalidDataException();
+
             int maxRange;
-            if (int.TryParse(lines[currentLine].Trim(), out maxRange) == false)
+            if (int.TryParse(maxRangeInString, out maxRange) == false)
                 throw new InvalidDataException();
             if (maxRange <= 0)
                 throw new InvalidDataException();
 
-            currentLine++;
+            if (numbersInStrings.Count / 3.0 != height * width)
+                throw new InvalidDataException();
 
-            string restOfLines = "";
-            for (; currentLine < lines.Length; currentLine++)
-                restOfLines += lines[currentLine] + " ";
-
-            string[] numbersInStrings = restOfLines.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            int[] numbers = new int[numbersInStrings.Length];
-            for (int i = 0; i < numbersInStrings.Length; i++)
+            int[] numbers = new int[numbersInStrings.Count];
+            for (int i = 0; i < numbersInStrings.Count; i++)
             {
                 int number;
                 if (int.TryParse(numbersInStrings[i], out number) == false)
                     throw new InvalidDataException();
-
                 if (number > maxRange)
                     throw new InvalidDataException();
+
+                numbers[i] = number;
             }
 
+            // Creating image object
+
             List<Pixel> pixels = new List<Pixel>();
-            int counter = 0;
-            while (counter < numbers.Length)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 int red = 0;
                 int green = 0;
                 int blue = 0;
-                Pixel pixel = null;
 
-                if (counter % 3 == 0)
-                    red = numbers[counter];
-                else if ((counter - 1) % 3 == 0)
-                    green = numbers[counter];
-                else if ((counter - 2) % 3 == 0)
+                if (i % 3 == 0)
+                    red = numbers[i];
+                else if ((i - 1) % 3 == 0)
+                    green = numbers[i];
+                else if ((i - 2) % 3 == 0)
                 {
-                    blue = numbers[counter];
-                    pixel = new Pixel(red, green, blue);
+                    blue = numbers[i];
+                    Pixel pixel = new Pixel(red, green, blue);
                     pixels.Add(pixel);
                 }
-
-                counter++;
             }
 
             Pixel[,] image = new Pixel[height, width];
-            int index = 0;
             for (int row = 0; row < height; row++)
                 for (int column = 0; column < width; column++)
-                {
-                    index = row * width + column;
-                    if (index >= pixels.Count)
-                        throw new InvalidDataException();
                     image[row, column] = pixels[row * width + column];
-                }
-            if (pixels.Count - 1 != index)
-                throw new InvalidDataException();
 
             return new Image(metadata, maxRange, image);
         }
