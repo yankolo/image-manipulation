@@ -12,4 +12,4 @@ namespace ImageManipulation
         Image Parse(String imageData);
     }
 }
-}
+
