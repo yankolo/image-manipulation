@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    class PgmSerializer : IImageSerializer
+    public class PgmSerializer : IImageSerializer
     {
         public string Serialize(Image i)
         {
