@@ -29,7 +29,7 @@ namespace ImageManipulation
             {
                 for (int x = 0; x < i.GetLength(1); x++)
                 {
-                    pixels += i[x, y].Red + " ";
+                    pixels += i[y, x].Red + " ";
                 }
             }
 
