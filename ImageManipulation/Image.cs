@@ -24,7 +24,7 @@ namespace ImageManipulation
 
         public int GetLength(int rank)
         {
-            if (rank != 0 || rank != 1)
+            if (rank != 0 && rank != 1)
                 throw new IndexOutOfRangeException("You can only use ranks of either 0 or 1");
 
             if (rank == 0)
