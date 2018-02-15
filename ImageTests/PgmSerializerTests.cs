@@ -19,7 +19,7 @@ namespace ImageTests
             pixels[1, 2] = new Pixel(200);
             Image image = new Image("This is a test image", 255, pixels);
             string stringToCompare = "P2" + System.Environment.NewLine + "# This is a test image" + System.Environment.NewLine + "3 2" +
-                System.Environment.NewLine + "255" + System.Environment.NewLine + "255 122 100 155 180 200";
+                System.Environment.NewLine + "255" + System.Environment.NewLine + "255 122 100 155 180 200 ";
 
             PgmSerializer serializer = new PgmSerializer();
             string imageAsString = serializer.Serialize(image);
