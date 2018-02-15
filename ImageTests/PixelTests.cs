@@ -4,24 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ImageTests
 {
     [TestClass]
-    public class PixelTest
+    public class PixelTests
     {
         [TestMethod]
-        public void ConstructorTest()
+        public void TestMethod1()
         {
-
-
-
-
-        }
-        [TestMethod]
-        public void ConstructorTest2()
-        {
-
-
-
-
-
         }
     }
 }

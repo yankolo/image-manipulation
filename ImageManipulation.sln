@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManipulation", "ImageManipulation\ImageManipulation.csproj", "{2A2BF6A2-E1C5-4B06-A79D-63B142D02C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTests", "ImageTests\ImageTests.csproj", "{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageTests", "ImageTests\ImageTests.csproj", "{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{2A2BF6A2-E1C5-4B06-A79D-63B142D02C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A2BF6A2-E1C5-4B06-A79D-63B142D02C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A2BF6A2-E1C5-4B06-A79D-63B142D02C0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
