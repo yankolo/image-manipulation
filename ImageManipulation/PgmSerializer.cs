@@ -32,6 +32,7 @@ namespace ImageManipulation
                     pixels += i[y, x].Red + " ";
                 }
             }
+            pixels = pixels.Trim();
 
             return "P2" + System.Environment.NewLine + metadata + widthHeight + maxRange + pixels;
         }
@@ -54,6 +55,7 @@ namespace ImageManipulation
 
                 currentLine++;
             }
+            metadata = metadata.Trim();
 
             string[] widthHeight = lines[currentLine].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string widthInString = widthHeight[0].Trim();
