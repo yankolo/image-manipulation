@@ -58,7 +58,7 @@ namespace ImageManipulation
         {
             if (horizontal)
             {
-                for (int y = 0; y < _data.GetLength(0); y++)
+                for (int y = 0; y < _data.GetLength(0)/2; y++)
                 {
                     Pixel[] temp = new Pixel[_data.GetLength(1)];
 
