@@ -117,6 +117,28 @@ namespace ImageTests
             Assert.AreNotEqual(greyPiValue, greyPixValue);
         }
 
+        [TestMethod]
+        public void Equals_EvaluateTwoEqualObject_True()
+        {
+            Pixel pi = new Pixel(222, 223, 224);
+            Pixel pix = new Pixel(222, 223, 224);
+
+            if (!(pi.Equals(pix)))
+            {
+                Assert.Fail();
+            }
+        }
+        [TestMethod]
+        public void Equals_EvaluateTwoUnequalObject_True()
+        {
+            Pixel pi = new Pixel(223, 223, 224);
+            Pixel pix = new Pixel(222, 223, 224);
+
+            if ((pi.Equals(pix)))
+            {
+                Assert.Fail();
+            }
+        }
 
     }
 }
