@@ -14,11 +14,11 @@ namespace ImageManipulation
 
         public int MaxRange { get; private set; }
 
-        public Pixel this [int x , int y]
+        public Pixel this [int y , int x]
         {
             get
             {
-                return _data[x, y];
+                return _data[y, x];
             }
         }
 
@@ -42,16 +42,16 @@ namespace ImageManipulation
             MaxRange = maxRange;
 
             _data = new Pixel[data.GetLength(0), data.GetLength(1)];
-            for (int x = 0; x < data.GetLength(0); x++)
-                for (int y = 0; y < data.GetLength(1); y++)
-                    _data[x, y] = data[x, y];
+            for (int y = 0; y < data.GetLength(0); y++)
+                for (int x = 0; x < data.GetLength(1); x++)
+                    _data[y, x] = data[y, x];
         }
 
         public void ToGrey()
         {
-            for (int x = 0; x < _data.GetLength(0); x++)
-                for (int y = 0; y < _data.GetLength(1); y++)
-                    _data[x, y] = new Pixel(_data[x, y].Grey());
+            for (int y = 0; y < _data.GetLength(0); y++)
+                for (int x = 0; x < _data.GetLength(1); x++)
+                    _data[y, x] = new Pixel(_data[y, x].Grey());
         }
 
         public void Flip(bool horizontal)
@@ -110,11 +110,11 @@ namespace ImageManipulation
             }
             else
             {
-                for(int x = 0; x < _data.GetLength(0); x++)
+                for(int y = 0; y < _data.GetLength(0); y++)
                 {
-                    for(int y = 0; y < _data.GetLength(1); y++)
+                    for(int x = 0; x < _data.GetLength(1); x++)
                     {
-                        if (!(_data[x, y].Equals(img[x, y])))
+                        if (!(_data[y, x].Equals(img[y, x])))
                             return false;
                             
                     } 
