@@ -11,12 +11,15 @@ namespace ImageManipulation
     {
         public string Serialize(Image i)
         {
-            string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
-
             string metadata = "";
-            foreach (string line in metaDataLines)
+
+            if (String.IsNullOrEmpty(i.Metadata) == false)
             {
-                metadata += "# " + line + System.Environment.NewLine;
+                string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+                foreach (string line in metaDataLines)
+                {
+                    metadata += "# " + line + System.Environment.NewLine;
+                }
             }
 
             string widthHeight = i.GetLength(1) + " " + i.GetLength(0) + System.Environment.NewLine;
@@ -32,6 +35,7 @@ namespace ImageManipulation
                     pixels += i[x, y].Red + " " + i[x, y].Green + " " + i[x, y].Blue + " ";
                 }
             }
+            pixels = pixels.Trim();
 
             return "P3" + System.Environment.NewLine + metadata + widthHeight + maxRange + pixels;
         }
@@ -54,6 +58,7 @@ namespace ImageManipulation
 
                 currentLine++;
             }
+            metadata = metadata.Trim();
 
             string[] widthHeight = lines[currentLine].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string widthInString = widthHeight[0].Trim();

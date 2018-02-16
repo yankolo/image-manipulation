@@ -91,7 +91,7 @@ namespace ImageTests
         [TestMethod]
         public void Parse_ValidImageSeveralMetadataLines_True()
         {
-            string stringToParse = "P2" + System.Environment.NewLine + "# This is a test image" + System.Environment.NewLine + "# This is a second Line" + System.Environment.NewLine + "3 2" +
+            string stringToParse = "P2" + System.Environment.NewLine + "# This is a test image" + System.Environment.NewLine + "# This is a second line" + System.Environment.NewLine + "3 2" +
                 System.Environment.NewLine + "255" + System.Environment.NewLine + "255 122 100 155 180 200";
             Pixel[,] pixels = new Pixel[2, 3];
             pixels[0, 0] = new Pixel(255);
@@ -100,7 +100,7 @@ namespace ImageTests
             pixels[1, 0] = new Pixel(155);
             pixels[1, 1] = new Pixel(180);
             pixels[1, 2] = new Pixel(200);
-            Image imageToCompare = new Image("This is a test image" + System.Environment.NewLine + "This is a secocndline", 255, pixels);
+            Image imageToCompare = new Image("This is a test image" + System.Environment.NewLine + "This is a secocnd line", 255, pixels);
 
             PgmSerializer serializer = new PgmSerializer();
             Image image = serializer.Parse(stringToParse);
@@ -216,6 +216,7 @@ namespace ImageTests
             Assert.ThrowsException<InvalidDataException>(() => serializer.Parse(stringToParse));
         }
 
+        [TestMethod]
         public void Parse_PixelColourGreaterThanMaxRange_InvalidDataException()
         {
             string stringToParse = "P2" + System.Environment.NewLine + "# This is a test image" + System.Environment.NewLine + "3 2" +
