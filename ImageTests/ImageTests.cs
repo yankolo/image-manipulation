@@ -22,15 +22,8 @@ namespace ImageTests
             p[2, 0] = new Pixel(226);
             p[2, 1] = new Pixel(227);
             p[2, 2] = new Pixel(228);
-
-            try
-            {
-                Image img = new Image(metadata, maxRange, p);
-            }
-            catch
-            {
-                Assert.Fail();
-            }
+            Image img = new Image(metadata, maxRange, p);
+            
         }
         [TestMethod]
         public void ConstructorImage_PassInvalidArgumentForMaxRange_ExceptionThrown()
@@ -181,14 +174,9 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
-            try
-            {
-                img.Crop(-2, 0, 0, 0);
-            }
-            catch
-            {
+                
+            Assert.ThrowsException<ArgumentException>(() => img.Crop(-2, 0, 0, 0));
 
-            }
         }
         [TestMethod]
         public void Crop_PassInvalidArgumentsForStartY_False()
@@ -207,14 +195,9 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
-            try
-            {
-                img.Crop(0,-2,0,0);
-            }
-            catch
-            {
+                
+            Assert.ThrowsException<ArgumentException>(() => img.Crop(0, -2, 0, 0));
 
-            }
         }
         [TestMethod]
         public void Crop_PassInvalidArgumentsForEndX_False()
@@ -233,14 +216,9 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
-            try
-            {
-                img.Crop(0, 0, -2, 0);
-            }
-            catch
-            {
+            Assert.ThrowsException<ArgumentException>(() => img.Crop(0, 0, -2, 0));
 
-            }
+
         }
         [TestMethod]
         public void Crop_PassInvalidArgumentsForEndY_False()
@@ -259,14 +237,8 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
-            try
-            {
-                img.Crop(0, 0, 0, -2);
-            }
-            catch
-            {
-
-            }
+           
+            Assert.ThrowsException<ArgumentException>(() => img.Crop(0, 0, 0, -2));
         }
         [TestMethod]
         public void Crop_PassValidArguments_True()
@@ -318,15 +290,7 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
-
-            try
-            {
-               int i =  img.GetLength(2);
-            }
-            catch
-            {
-
-            }
+            Assert.ThrowsException<IndexOutOfRangeException>(() => img.GetLength(2));
         }
         [TestMethod]
         public void GetLength_PassValidArgument_True()

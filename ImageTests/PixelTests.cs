@@ -22,41 +22,24 @@ namespace ImageTests
         [TestMethod]
         public void ConstructorPixel_InvalidElementRed_ExceptionThrown()
         {
-            try
-            {
-                Pixel p = new Pixel(-2, 200, 250);
-                Assert.Fail();
-            }
-            catch
-            {
-                
-            }
+
+                Pixel p;
+                Assert.ThrowsException<ArgumentException>(() => p = new Pixel(-2, 200, 250));
         }
         [TestMethod]
         public void ConstructorPixel_InvalidElementGreen_ExceptionThrown()
         {
-            try
-            {
-                Pixel p = new Pixel(200, -2, 250);
-                Assert.Fail();
-            }
-            catch
-            {
+            Pixel p;
+            Assert.ThrowsException<ArgumentException>(() => p = new Pixel(200, -2, 250));
 
-            }
         }
         [TestMethod]
         public void ConstructorPixel_InvalidElementBlue_ExceptionThrown()
         {
-            try
-            {
-                Pixel p = new Pixel(200, 200, 256);
-                Assert.Fail();
-            }
-            catch
-            {
+            
+            Pixel p;
+            Assert.ThrowsException<ArgumentException>(() => p = new Pixel(200, 200, 256));
 
-            }
         }
 
         [TestMethod]
@@ -75,28 +58,16 @@ namespace ImageTests
         [TestMethod]
         public void ConstructorPixel_InvalidPositiveIntensityValue_ExceptionThrown()
         {
-            try
-            {
-                Pixel p = new Pixel(270);
-                Assert.Fail();
-            }
-            catch
-            {
-                
-            }
+            Pixel p;
+            Assert.ThrowsException<ArgumentException>(() => p = new Pixel(270));
+
         }
         [TestMethod]
         public void ConstructorPixel_InvalidNegativeIntensityValue_ExceptionThrown()
         {
-            try
-            {
-                Pixel p = new Pixel(-20);
-                Assert.Fail();
-            }
-            catch
-            {
-
-            }
+           
+            Pixel p;
+            Assert.ThrowsException<ArgumentException>(() => p = new Pixel(-20));
         }
         [TestMethod]
         public  void Grey_ValidNumbers_True()
