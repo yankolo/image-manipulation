@@ -32,7 +32,7 @@ namespace ImageManipulation
             {
                 for (int x = 0; x < i.GetLength(1); x++)
                 {
-                    pixels += i[x, y].Red + " " + i[x, y].Green + " " + i[x, y].Blue + " ";
+                    pixels += i[y, x].Red + " " + i[y, x].Green + " " + i[y, x].Blue + " ";
                 }
             }
             pixels = pixels.Trim();
