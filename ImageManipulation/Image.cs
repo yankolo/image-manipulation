@@ -100,5 +100,27 @@ namespace ImageManipulation
                 }
             _data = croppedImage;
         }
+        public override bool Equals(object obj)
+        {
+            var img = obj as Image;
+
+            if (img == null)
+            {
+                return false;
+            }
+            else
+            {
+                for(int x = 0; x < _data.GetLength(0); x++)
+                {
+                    for(int y = 0; y < _data.GetLength(1); y++)
+                    {
+                        if (!(_data[x, y].Equals(img[x, y])))
+                            return false;
+                            
+                    } 
+                }
+                return true;
+            }
+        }
     }
 }

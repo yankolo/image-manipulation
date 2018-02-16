@@ -34,6 +34,31 @@ namespace ImageManipulation
             return (Red + Green + Blue) / 3;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            var pix = obj as Pixel;
+            
+            if(pix == null)
+            {
+                return false;
+            }
+            else
+            {
+                if ((Red != pix.Red) || (Green != pix.Green) || (Blue != pix.Blue))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+
+        }
+
         private int ValidateColor(int color, string colorName)
         {
             if (color < 0 || color > 255)
