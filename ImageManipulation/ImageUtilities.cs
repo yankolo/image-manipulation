@@ -9,6 +9,12 @@ namespace ImageManipulation
 {
     public class ImageUtilities
     {
+        /// <summary>
+        /// Looks for all the files ending with .pgm or .pnm (Not recursive) inside a directory
+        /// and creates an Image[] from those files
+        /// </summary>
+        /// <param name="directory">The directory path from which to load imagess</param>
+        /// <returns></returns>
         public static Image[] LoadFolder(string directory)
         {
             string[] files = Directory.GetFiles(directory);
@@ -47,6 +53,12 @@ namespace ImageManipulation
             return images.ToArray();
         }
 
+        /// <summary>
+        /// Exports every Image object inside the Image[] to a directory using a specific format (pnm or pgm)
+        /// </summary>
+        /// <param name="directory">The directory to export the images</param>
+        /// <param name="images">The images to export</param>
+        /// <param name="format">The format used to export the images (either pnm or pgm)</param>
         public static void SaveFolder(string directory, Image[] images, string format)
         {
             PgmSerializer pgm = new PgmSerializer();
