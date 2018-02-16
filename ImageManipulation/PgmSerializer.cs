@@ -11,12 +11,15 @@ namespace ImageManipulation
     {
         public string Serialize(Image i)
         {
-            string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
-
             string metadata = "";
-            foreach (string line in metaDataLines)
+
+            if (String.IsNullOrEmpty(i.Metadata) == false)
             {
-                metadata += "# " + line + System.Environment.NewLine;
+                string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+                foreach (string line in metaDataLines)
+                {
+                    metadata += "# " + line + System.Environment.NewLine;
+                }
             }
 
             string widthHeight = i.GetLength(1) + " " + i.GetLength(0) + System.Environment.NewLine;
@@ -49,7 +52,7 @@ namespace ImageManipulation
             while (currentLine < lines.Length)
             {
                 if (lines[currentLine].StartsWith("#"))
-                    metadata += lines[currentLine].Substring(2) + " ";
+                    metadata += lines[currentLine].Substring(2) + System.Environment.NewLine;
                 else
                     break;
 
