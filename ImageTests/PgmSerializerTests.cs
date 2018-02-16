@@ -86,6 +86,7 @@ namespace ImageTests
             Image image = serializer.Parse(stringToParse);
 
             Assert.AreEqual(imageToCompare, image);
+            Assert.AreEqual(imageToCompare.Metadata, image.Metadata);
         }
 
         [TestMethod]
@@ -100,12 +101,13 @@ namespace ImageTests
             pixels[1, 0] = new Pixel(155);
             pixels[1, 1] = new Pixel(180);
             pixels[1, 2] = new Pixel(200);
-            Image imageToCompare = new Image("This is a test image" + System.Environment.NewLine + "This is a secocnd line", 255, pixels);
+            Image imageToCompare = new Image("This is a test image" + System.Environment.NewLine + "This is a second line", 255, pixels);
 
             PgmSerializer serializer = new PgmSerializer();
             Image image = serializer.Parse(stringToParse);
 
             Assert.AreEqual(imageToCompare, image);
+            Assert.AreEqual(imageToCompare.Metadata, image.Metadata);
         }
 
         [TestMethod]
@@ -126,6 +128,7 @@ namespace ImageTests
             Image image = serializer.Parse(stringToParse);
             
             Assert.AreEqual(imageToCompare, image);
+            Assert.AreEqual(imageToCompare.Metadata, image.Metadata);
         }
 
         [TestMethod]

@@ -46,7 +46,7 @@ namespace ImageManipulation
             {
                 for (int x = 0; x < data.GetLength(1); x++)
                 {
-                    if (data[y, x].Green < MaxRange|| data[y,x].Blue < MaxRange || data[y,x].Red < MaxRange)
+                    if (data[y, x].Green > MaxRange|| data[y,x].Blue > MaxRange || data[y,x].Red > MaxRange)
                     {
                         throw new ArgumentException("");
                     }
@@ -122,9 +122,7 @@ namespace ImageManipulation
                 return false;
             }
             else
-            {
-                if (img.MaxRange != MaxRange)
-                    return false;
+            { 
                 for(int y = 0; y < _data.GetLength(0); y++)
                 {
                     for(int x = 0; x < _data.GetLength(1); x++)

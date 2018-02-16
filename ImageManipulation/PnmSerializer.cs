@@ -52,7 +52,7 @@ namespace ImageManipulation
             while (currentLine < lines.Length)
             {
                 if (lines[currentLine].StartsWith("#"))
-                    metadata += lines[currentLine].Substring(2) + " ";
+                    metadata += lines[currentLine].Substring(2) + System.Environment.NewLine;
                 else
                     break;
 
