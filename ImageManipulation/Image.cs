@@ -72,7 +72,7 @@ namespace ImageManipulation
             }
             else
             {
-                for (int x = 0; x < _data.GetLength(1); x++)
+                for (int x = 0; x < _data.GetLength(1)/2; x++)
                 {
                     Pixel[] temp = new Pixel[_data.GetLength(0)];
 
