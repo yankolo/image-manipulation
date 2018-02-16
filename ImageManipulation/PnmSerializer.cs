@@ -113,14 +113,13 @@ namespace ImageManipulation
             }
 
             // Creating image object
+            int red = 0;
+            int green = 0;
+            int blue = 0;
 
             List<Pixel> pixels = new List<Pixel>();
             for (int i = 0; i < numbers.Length; i++)
             {
-                int red = 0;
-                int green = 0;
-                int blue = 0;
-
                 if (i % 3 == 0)
                     red = numbers[i];
                 else if ((i - 1) % 3 == 0)
