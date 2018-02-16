@@ -43,8 +43,21 @@ namespace ImageManipulation
 
             _data = new Pixel[data.GetLength(0), data.GetLength(1)];
             for (int y = 0; y < data.GetLength(0); y++)
+            {
                 for (int x = 0; x < data.GetLength(1); x++)
-                    _data[y, x] = data[y, x];
+                {
+                    if (data[y, x].Green < MaxRange|| data[y,x].Blue < MaxRange || data[y,x].Red < MaxRange)
+                    {
+                        throw new ArgumentException("");
+                    }
+                    else
+                    {
+                        _data[y, x] = data[y, x];
+
+                    }
+                }
+
+            }
         }
 
         public void ToGrey()
@@ -110,6 +123,8 @@ namespace ImageManipulation
             }
             else
             {
+                if (img.MaxRange != MaxRange)
+                    return false;
                 for(int y = 0; y < _data.GetLength(0); y++)
                 {
                     for(int x = 0; x < _data.GetLength(1); x++)
