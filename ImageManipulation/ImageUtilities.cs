@@ -14,7 +14,7 @@ namespace ImageManipulation
         /// and creates an Image[] from those files
         /// </summary>
         /// <param name="directory">The directory path from which to load imagess</param>
-        /// <returns></returns>
+        /// <returns>The Image[] array that is created from the files in the directory</returns>
         public static Image[] LoadFolder(string directory)
         {
             string[] files = Directory.GetFiles(directory);

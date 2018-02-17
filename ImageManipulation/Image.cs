@@ -21,7 +21,11 @@ namespace ImageManipulation
                 return _data[y, x];
             }
         }
-
+        /// <summary>
+        /// Returns the length of the 2D pixel array
+        /// </summary>
+        /// <param name="rank"></param>
+        /// <returns>Returns the length of the dimension wished</returns>
         public int GetLength(int rank)
         {
             if (rank != 0 && rank != 1)
@@ -32,11 +36,16 @@ namespace ImageManipulation
             else
                 return _data.GetLength(1);
         }
-
+        /// <summary>
+        /// Constructor for the Image class, creates a image object
+        /// </summary>
+        /// <param name="metadata"></param>
+        /// <param name="maxRange"></param>
+        /// <param name="data"></param>
         public Image(string metadata, int maxRange, Pixel[,] data)
         {
             if (maxRange < 0)
-                throw new ArgumentException("");
+                throw new ArgumentException("Max Range cannot be negative");
 
             Metadata = metadata;
             MaxRange = maxRange;
@@ -48,7 +57,7 @@ namespace ImageManipulation
                 {
                     if (data[y, x].Green > MaxRange|| data[y,x].Blue > MaxRange || data[y,x].Red > MaxRange)
                     {
-                        throw new ArgumentException("");
+                        throw new ArgumentException("Pixel Values cannot be bigger than the MaxRange");
                     }
                     else
                     {
@@ -59,14 +68,22 @@ namespace ImageManipulation
 
             }
         }
-
+        /// <summary>
+        /// Turns the Image to grey.
+        /// Turns each pixel to grey.
+        /// </summary>
         public void ToGrey()
         {
             for (int y = 0; y < _data.GetLength(0); y++)
                 for (int x = 0; x < _data.GetLength(1); x++)
                     _data[y, x] = new Pixel(_data[y, x].Grey());
         }
-
+        /// <summary>
+        /// Flips the Image object depending on a boolean value.
+        /// If boolean value is true, the image will flip horizontally.
+        /// If boolean value is false, the image will flip vertically.
+        /// </summary>
+        /// <param name="horizontal"></param>
         public void Flip(bool horizontal)
         {
             if (horizontal)
@@ -98,11 +115,18 @@ namespace ImageManipulation
                 }
             }
         }
-
+        /// <summary>
+        /// This method crops the Image depending on 4 coordinates.
+        /// </summary>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="endX"></param>
+        /// <param name="endY"></param>
         public void Crop(int startX, int startY , int endX, int endY)
         {
             if (startX > endX || startY > endY || startX < 0 || startY < 0 || endX > _data.GetLength(1) || endY > _data.GetLength(0))
-                throw new ArgumentException("Invalid crop coordinates");
+                throw new ArgumentException("Invalid coordinates: Values must be postive, startX and startY must be bigger than endX and endY, endX and endY cannot" +
+                    " be bigger than the size of the pixel array");
 
             Pixel[,] croppedImage = new Pixel[(endY - startY), (endX - startX)];
 
@@ -113,8 +137,16 @@ namespace ImageManipulation
                 }
             _data = croppedImage;
         }
+        /// <summary>
+        /// Evaluates if two objects are equal depending on their maxRange and that each of
+        /// their pixels are equal.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>Returns true or false</returns>
         public override bool Equals(object obj)
         {
+            if (obj == null)
+                return false;
             var img = obj as Image;
 
             if (img == null)
@@ -122,7 +154,10 @@ namespace ImageManipulation
                 return false;
             }
             else
-            { 
+            {
+                if (img.MaxRange != MaxRange)
+                    return false;
+
                 for(int y = 0; y < _data.GetLength(0); y++)
                 {
                     for(int x = 0; x < _data.GetLength(1); x++)
