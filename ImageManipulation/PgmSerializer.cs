@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    class PgmSerializer : IImageSerializer
+    public class PgmSerializer : IImageSerializer
     {
         public string Serialize(Image i)
         {
-            string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
-
             string metadata = "";
-            foreach (string line in metaDataLines)
+
+            // Creating the string that will contain the metadata
+            if (String.IsNullOrEmpty(i.Metadata) == false)
             {
-                metadata += "# " + line + System.Environment.NewLine;
+                string[] metaDataLines = i.Metadata.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None);
+                foreach (string line in metaDataLines)
+                {
+                    metadata += "# " + line + System.Environment.NewLine;
+                }
             }
 
             string widthHeight = i.GetLength(1) + " " + i.GetLength(0) + System.Environment.NewLine;
@@ -25,13 +29,15 @@ namespace ImageManipulation
 
             string pixels = "";
 
+            // Creating the string that will contain all the pixels by taking only one colour (only one colour needed for pgm)
             for (int y = 0; y < i.GetLength(0); y++)
             {
                 for (int x = 0; x < i.GetLength(1); x++)
                 {
-                    pixels += i[x, y].Red + " ";
+                    pixels += i[y, x].Red + " ";
                 }
             }
+            pixels = pixels.Trim();
 
             return "P2" + System.Environment.NewLine + metadata + widthHeight + maxRange + pixels;
         }
@@ -48,12 +54,13 @@ namespace ImageManipulation
             while (currentLine < lines.Length)
             {
                 if (lines[currentLine].StartsWith("#"))
-                    metadata += lines[currentLine].Substring(2) + " ";
+                    metadata += lines[currentLine].Substring(2) + System.Environment.NewLine;
                 else
                     break;
 
                 currentLine++;
             }
+            metadata = metadata.Trim();
 
             string[] widthHeight = lines[currentLine].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             string widthInString = widthHeight[0].Trim();
@@ -117,6 +124,7 @@ namespace ImageManipulation
                 pixels.Add(pixel);
             }
 
+            // Putting all the values from pixels list (1D) into the image 2D array
             Pixel[,] image = new Pixel[height, width];
             for (int row = 0; row < height; row++)
                 for (int column = 0; column < width; column++)

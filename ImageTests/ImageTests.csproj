@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94B4BFFB-873A-4012-94E7-96E11CBE1ACB}</ProjectGuid>
+    <ProjectGuid>{A23601C1-0BEC-40E3-9D62-A005B3CA65AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ImageTests</RootNamespace>
@@ -48,8 +48,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ImageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PgmSerializerTests.cs" />
+    <Compile Include="PixelTests.cs" />
+    <Compile Include="PnmSerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
