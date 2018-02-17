@@ -65,16 +65,26 @@ namespace ImageTests
             p[1, 2] = new Pixel(225, 226, 227);
             p[2, 0] = new Pixel(226, 227, 228);
             p[2, 1] = new Pixel(227, 228, 229);
-            p[2, 2] = new Pixel(228, 229, 228);
+            p[2, 2] = new Pixel(228, 229, 230);
 
             Image img = new Image(metadata, maxRange, p);
+
+            Pixel[,] expectedPixels = new Pixel[3, 3];
+            expectedPixels[0, 0] = new Pixel(221);
+            expectedPixels[0, 1] = new Pixel(222);
+            expectedPixels[0, 2] = new Pixel(223);
+            expectedPixels[1, 0] = new Pixel(224);
+            expectedPixels[1, 1] = new Pixel(225);
+            expectedPixels[1, 2] = new Pixel(226);
+            expectedPixels[2, 0] = new Pixel(227);
+            expectedPixels[2, 1] = new Pixel(228);
+            expectedPixels[2, 2] = new Pixel(229);
+
+            Image expectedImage = new Image(metadata, maxRange, expectedPixels);
+
             img.ToGrey();
 
-
-            for (int x = 0; x < img.GetLength(0); x++)
-                for (int y = 0; y < img.GetLength(1); y++)
-                    if(!(img[x,y].Equals(new Pixel(p[x,y].Grey()))))
-                        Assert.Fail();
+            Assert.AreEqual(expectedImage, img);
         }
 
         [TestMethod]
@@ -109,11 +119,8 @@ namespace ImageTests
             p2[0, 2] = new Pixel(228, 229, 228);
 
             Image img2 = new Image(metadata, maxRange, p2);
-            for (int x = 0; x < img.GetLength(0); x++)
-                for (int y = 0; y < img.GetLength(1); y++)
-                    if (!(img[x, y].Equals(img2[x, y])))
-                        Assert.Fail();
 
+            Assert.AreEqual(img2, img);
         }
 
         [TestMethod]
@@ -150,12 +157,7 @@ namespace ImageTests
 
             Image img2 = new Image(metadata, maxRange, p2);
 
-            for (int x = 0; x < img.GetLength(0); x++)
-                for (int y = 0; y < img.GetLength(1); y++)
-                    if (!(img[x, y].Equals(img2[x, y])))
-                        Assert.Fail();
-
-
+            Assert.AreEqual(img2, img);
         }
         [TestMethod]
         public void Crop_PassInvalidArgumentsForStartX_False()
@@ -264,14 +266,11 @@ namespace ImageTests
             p2[1, 0] = new Pixel(223, 224, 225);
             p2[1, 1] = new Pixel(224, 225, 226);
 
-
-
             img.Crop(0, 0, 2, 2);
-            for (int x = 0; x < img.GetLength(0); x++)
-                for (int y = 0; y < img.GetLength(1); y++)
-                    if (!(img[x, y].Equals(p2[x, y])))
-                        Assert.Fail();
 
+            Image img2 = new Image(metadata, maxRange, p2);
+
+            Assert.AreEqual(img2, img);
         }
         [TestMethod]
         public void GetLength_PassInvalidArgument_False()
@@ -309,15 +308,11 @@ namespace ImageTests
             p[2, 2] = new Pixel(228, 229, 228);
 
             Image img = new Image(metadata, maxRange, p);
+            int expectedLength1 = 3;
 
-            try
-            {
-                int i = img.GetLength(1);
-            }
-            catch
-            {
+            int i = img.GetLength(1);
 
-            }
+            Assert.AreEqual(expectedLength1, i);
         }
 
         [TestMethod]
@@ -353,13 +348,9 @@ namespace ImageTests
 
             Image img2 = new Image(metadata2, maxRange2, p2);
 
-            if (!(img.Equals(img2)))
-            {
-                Assert.Fail();
-            }
+            bool equalsResult = img.Equals(img2);
 
-
-
+            Assert.IsTrue(equalsResult);
         }
         [TestMethod]
         public void Equals_EvaluateTwoUnequalObjects_False()
@@ -394,15 +385,94 @@ namespace ImageTests
 
             Image img2 = new Image(metadata2, maxRange2, p2);
 
-            if ((img.Equals(img2)))
-            {
-                Assert.Fail();
-            }
+            bool equalsResult = img.Equals(img2);
 
-
-
+            Assert.IsFalse(equalsResult);
         }
+        [TestMethod]
+        public void Equals_ParamaterIsNull_False()
+        {
+            string metadata = "Creating a valid Image Object";
+            int maxRange = 240;
+            Pixel[,] p = new Pixel[3, 3];
+            p[0, 0] = new Pixel(220, 221, 222);
+            p[0, 1] = new Pixel(221, 222, 223);
+            p[0, 2] = new Pixel(222, 223, 224);
+            p[1, 0] = new Pixel(223, 224, 225);
+            p[1, 1] = new Pixel(224, 225, 226);
+            p[1, 2] = new Pixel(225, 226, 227);
+            p[2, 0] = new Pixel(226, 227, 228);
+            p[2, 1] = new Pixel(227, 228, 229);
+            p[2, 2] = new Pixel(228, 229, 228);
 
+            Image img = new Image(metadata, maxRange, p);
 
+            Image img2 = null;
+
+            bool equalsResult = img.Equals(img2);
+
+            Assert.IsFalse(equalsResult);
+        }
+        [TestMethod]
+        public void Equals_ParametersIsNotImage_False()
+        {
+            string metadata = "Creating a valid Image Object";
+            int maxRange = 240;
+            Pixel[,] p = new Pixel[3, 3];
+            p[0, 0] = new Pixel(220, 221, 222);
+            p[0, 1] = new Pixel(221, 222, 223);
+            p[0, 2] = new Pixel(222, 223, 224);
+            p[1, 0] = new Pixel(223, 224, 225);
+            p[1, 1] = new Pixel(224, 225, 226);
+            p[1, 2] = new Pixel(225, 226, 227);
+            p[2, 0] = new Pixel(226, 227, 228);
+            p[2, 1] = new Pixel(227, 228, 229);
+            p[2, 2] = new Pixel(228, 229, 228);
+
+            Image img = new Image(metadata, maxRange, p);
+
+            Object img2 = new object();
+
+            bool equalsResult = img.Equals(img2);
+
+            Assert.IsFalse(equalsResult);
+        }
+        [TestMethod]
+        public void Equals_MaxRangeIsNotTheSame_False()
+        {
+            string metadata = "Creating a valid Image Object";
+            int maxRange = 240;
+            Pixel[,] p = new Pixel[3, 3];
+            p[0, 0] = new Pixel(220, 221, 222);
+            p[0, 1] = new Pixel(221, 222, 223);
+            p[0, 2] = new Pixel(222, 223, 224);
+            p[1, 0] = new Pixel(223, 224, 225);
+            p[1, 1] = new Pixel(224, 225, 226);
+            p[1, 2] = new Pixel(225, 226, 227);
+            p[2, 0] = new Pixel(226, 227, 228);
+            p[2, 1] = new Pixel(227, 228, 229);
+            p[2, 2] = new Pixel(228, 229, 228);
+
+            Image img = new Image(metadata, maxRange, p);
+
+            string metadata2 = "Creating a valid Image Object";
+            int maxRange2 = 255;
+            Pixel[,] p2 = new Pixel[3, 3];
+            p2[0, 0] = new Pixel(220, 221, 222);
+            p2[0, 1] = new Pixel(221, 222, 223);
+            p2[0, 2] = new Pixel(222, 223, 224);
+            p2[1, 0] = new Pixel(223, 224, 225);
+            p2[1, 1] = new Pixel(224, 225, 226);
+            p2[1, 2] = new Pixel(225, 226, 227);
+            p2[2, 0] = new Pixel(226, 227, 228);
+            p2[2, 1] = new Pixel(227, 228, 229);
+            p2[2, 2] = new Pixel(228, 229, 228);
+
+            Image img2 = new Image(metadata2, maxRange2, p2);
+
+            bool equalsResult = img.Equals(img2);
+
+            Assert.IsFalse(equalsResult);
+        }
     }
 }

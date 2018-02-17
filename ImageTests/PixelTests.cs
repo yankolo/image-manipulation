@@ -12,7 +12,7 @@ namespace ImageTests
         {
             try
             {
-                Pixel p = new Pixel(200,200,250);
+                Pixel p = new Pixel(200, 200, 250);
             }
             catch
             {
@@ -70,22 +70,12 @@ namespace ImageTests
             Assert.ThrowsException<ArgumentException>(() => p = new Pixel(-20));
         }
         [TestMethod]
-        public  void Grey_ValidNumbers_True()
+        public void Grey_ValidNumbers_True()
         {
             Pixel p = new Pixel(222, 223, 224);
             int greyPixelValue = p.Grey();
             int valueToBeCompared = (222 + 223 + 224) / 3;
             Assert.AreEqual(greyPixelValue, valueToBeCompared);
-        }
-        [TestMethod]
-        public void Grey_ValidNumberButNotEqual_False()
-        {
-            Pixel pi = new Pixel(222, 223, 224);
-            int greyPiValue = pi.Grey();
-            Pixel pix = new Pixel(222);
-            int greyPixValue = pix.Grey();
-
-            Assert.AreNotEqual(greyPiValue, greyPixValue);
         }
 
         [TestMethod]
@@ -94,22 +84,39 @@ namespace ImageTests
             Pixel pi = new Pixel(222, 223, 224);
             Pixel pix = new Pixel(222, 223, 224);
 
-            if (!(pi.Equals(pix)))
-            {
-                Assert.Fail();
-            }
+            bool equalsResult = pi.Equals(pix);
+
+            Assert.IsTrue(equalsResult);
         }
         [TestMethod]
-        public void Equals_EvaluateTwoUnequalObject_True()
+        public void Equals_EvaluateTwoUnequalObject_False()
         {
             Pixel pi = new Pixel(223, 223, 224);
             Pixel pix = new Pixel(222, 223, 224);
 
-            if ((pi.Equals(pix)))
-            {
-                Assert.Fail();
-            }
-        }
+            bool equalsResult = pi.Equals(pix);
 
+            Assert.IsFalse(equalsResult);
+        }
+        [TestMethod]
+        public void Equals_ParamaterIsNull_False()
+        {
+            Pixel pi = new Pixel(223, 223, 224);
+            Pixel pix = null;
+
+            bool equalsResult = pi.Equals(pix);
+
+            Assert.IsFalse(equalsResult);
+        }
+        [TestMethod]
+        public void Equals_ParametersIsNotPixel_False()
+        {
+            Pixel pi = new Pixel(223, 223, 224);
+            Object pix = new object();
+
+            bool equalsResult = pi.Equals(pix);
+
+            Assert.IsFalse(equalsResult);
+        }
     }
 }
